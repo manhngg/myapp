@@ -1,0 +1,33 @@
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="container">
+    <%= link_to "MYAPP", root_path, id: "logo" %>
+    <nav>
+      <ul class="nav navbar-nav navbar-left">
+        <li><%= link_to "Men", products_path(:gender => "men") %></li>
+        <li class="divider">|</li>
+        <li><%= link_to "Women", products_path(:gender => "women") %></li>
+      </ul>
+    </nav>
+
+    <nav>
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to "Help", help_path %></li>
+        <li class="divider">|</li>
+        <% if current_user.present? %>
+          <li><%= link_to "Track Your Order", orders_path %></li>
+          <% if current_user.try(:admin?) %>
+            <li><%= link_to "Admin Page", admin_root_path %></li>
+          <% end %>
+          <li><%= link_to "Welcome back #{current_user.name}", current_user %></li>
+          <li><%= link_to "Wish", wish_path %></li>
+          <li><%= link_to "Cart", cart_path %></li>
+        <% else %>
+          <li><%= link_to "order tracker and returns", orders_path %></li>
+          <li class="divider">|</li>
+          <li><%= link_to "Newsletter signup", new_user_registration_path %></li>
+          <li><%= link_to "Log in", new_user_session_path %></li>
+        <% end %>
+      </ul>
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,90 @@
+<h1>All products</h1>
+<% if current_user.try(:admin?) %>
+<%= link_to 'Sản phẩm mới', new_product_path %>
+<% end %><br>
+Tất cả sản phẩm: <%= @products.total_count %><br>
+Sản phẩm mỗi trang: <%= @products.count %><br>
+Tổng số trang: <%= @products.total_pages %><br>
+Trang hiện tại: <%= @products.current_page %><br>
+Trang tiếp theo: <%= @products.next_page  %><br>
+Trang trước: <%= @products.prev_page %><br>
+Có phải trang đầu không?: <%= @products.first_page?  %><br>
+Có phải trang cuối không?: <%= @products.last_page? %><br>
+Có phải trang ngoài khoảng?: <%= @products.out_of_range?  %><br>
+
+Thông tin các mục trang: <%= page_entries_info @products, entry_name: 'item' %><br>
+Đéo biết là cái gì: <%= rel_next_prev_link_tags @products %><br>
+
+Đường dẫn trang tiếp theo: <%= path_to_next_page @products %><br>
+Đường dẫn trang trước: <%= path_to_prev_page @products %><br>
+
+<%= paginate @products %>
+
+<table border="1">
+  <tr>
+    <th>id sản phẩm:</th>
+    <th>Tên Sản Phẩm:</th>
+    <th>Avatar:</th>
+    <th>Images:</th>
+    <th>Gender:</th>
+    <th>Giá bán:</th>
+    <th>Giá gốc:</th>
+    <th>Màu - color:</th>
+    <th>Dòng franchise:</th>
+    <th>Loại producttype:</th>
+    <th>Nhãn brand:</th>
+    <th>Danh mục category:</th>
+    <th>Môn sport:</th>
+    <th>sku:</th>
+    <th> stock:</th>
+</tr>
+
+<% @products.each do |product| %>
+<tr>
+
+    <td><%= product.id %></td>
+    <td><%= product.name %></td>
+    <td>
+        <% if product.variants.first.stock.zero? %>
+            Out of stock
+    <% else %>
+    <%= image_tag product.variants.first.avatar, :height => "100",:width=>"100" %>
+        <%= form_for product, :url => cart_items_path, :html => { :method => :post } do |f|%>
+        <%= f.number_field :quantity, value: 1, class: "number-tag", min: 1 %>
+      <%= f.hidden_field :product_id, value: product.id %>
+      <%= f.submit 'Add to Cart', class: "btn btn-success" %>
+<% end %>
+<% end %>
+<%= form_for product, :url => wish_items_path, :html => { :method => :post } do |f|%>
+      <%= f.hidden_field :product_id, value: product.id %>
+      <%= f.submit @wish.wish_items.find_by(product_id: product.id) ? 'Remove from Wish' : 'Add to Wish', class: "btn btn-success" %>
+<% end %>
+    </td>
+    <td>
+        <% product.variants.first.images.each do |image| %>
+        <%= image_tag image , :height => "50",:width=>"50" %>
+        <% end %>
+    </td>
+    <td><%= product.gender.name %></td>
+    <td><%= product.variants.first.price %></td>
+    <td><%= product.variants.first.originalprice %></td>
+    <td><%= product.variants.first.color.name %></td>
+    <td><%= product.franchise_id ? product.franchise.name: '' %></td>
+    <td><%= product.producttype_id ? product.producttype.name: '' %></td>
+    <td><%= product.brand_id ? product.brand.name: '' %></td>
+    <td><%= product.category_id ? product.category.name: '' %></td>
+    <td><%= product.sport_id ? product.sport.name: '' %></td>
+    <td><%= product.variants.first.sku %></td>
+    <td><%= product.variants.first.stock %></td>
+    <td><%= link_to 'Xem', "/products/#{product.id}?variant=#{product.variants.first.id}" %></td>
+    <% if current_user.try(:admin?) %>
+    <td><%= link_to 'Sửa', edit_product_path(product) %></td>
+    <td><%= link_to 'Xóa', product_path(product),
+    method: :delete,
+    data: { confirm: 'Bạn có chắc không?' } %></td>
+    <% end %>
+</tr>
+<% end %>
+</table>
+<br>
+<%= link_to 'Trở lại', root_path %>

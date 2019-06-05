@@ -1,0 +1,336 @@
+<% provide(:title, "adidas Official Website") %>
+
+<div class="center jumbotron">
+  <h1>RUN FOR THE OCEANS</h1>
+  <%= link_to image_tag("lib/running-fw19-rfto-educate-hp-lf-mh-medium-d_tcm221-356981.jpg", size: "200x80"), "https://www.adidas.com/us/runfortheoceans" %>
+  <h2>It"s time to take action against marine plastic pollution. Rally your friends to join the movement.</h2>
+  <%= link_to "LEARN MORE", "https://www.adidas.com/us/runfortheoceans", class: "btn btn-lg btn-primary" %>
+</div>
+
+<div class="center jumbotron">
+  <h1>HOME OF CLASSICS</h1>
+  <%= link_to image_tag("lib/originals-fw19-hoc-drop1-tease-hp-mh-medium-collection-d_tcm221-361271.jpg", size: "200x80"), "https://www.adidas.com/us/home_of_classics" %>
+  <h2> Iconic shoes built for purpose and made to get messed up.</h2>
+  <%= link_to "LEARN MORE", "https://www.adidas.com/us/home_of_classics", class: "btn btn-lg btn-primary" %>
+</div>
+
+<div class="center jumbotron">
+  <div class="row">
+    <aside class="col-md-6">
+      <%= link_to image_tag("lib/UB19_EIM_MENS_960x480_YELLOW_tcm221-363911.jpg", size: "150x80"), "https://www.adidas.com/us/ultraboost_19" %>
+      <h1>ALPHAEDGE 4D</h1>
+      <h2>Feel the future</h2>
+      <%= link_to "PREVIEW NOW", "https://www.adidas.com/us/ultraboost_19", class: "btn btn-lg btn-primary" %>
+    </aside>
+    <div class="col-md-6">
+      <%= link_to image_tag("lib/UB19_EIM_MENS_960x480_YELLOW_tcm221-363911.jpg", size: "150x80"), "https://www.adidas.com/us/ultraboost_19" %>
+      <h1>SLEEK</h1>
+      <h2>Return harm than before.</h2>
+      <%= link_to "SHOP NOW", "#", class: "btn btn-lg btn-primary" %>
+    </div>
+  </div>
+</div>
+
+<div class="center jumbotron">
+  <h1>FOR THE OCEANS</h1>
+  <%= link_to image_tag("lib/turtle_MH_DT2-UPDATE2_tcm221-366707.jpg", size: "200x80"), "https://www.adidas.com/us/ultraboost_19" %>
+  <h2>We"re rethinking and repurposing plastic.</h2>
+  <%= link_to "LEARN MORE", "#", class: "btn btn-lg btn-primary" %>
+  <%= link_to "SHOP SUSTAINABLE PRODUCTS", "#", class: "btn btn-lg btn-primary" %>
+</div>
+
+<div class="center jumbotron">
+  <h1>WHAT"S TRENDING</h1>
+</div>
+
+<div class="center jumbotron">
+                        <h1>RECENTLY VIEWED ITEMS</h1>
+                        <!-- ---------------------------------------------------------------------------------------------------------------------------- -->
+
+
+                        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/adidasvn/css/font-awesome.min.css" rel="stylesheet">
+                      <link href="/adidasvn/css/custom.css" rel="stylesheet">
+                      <div class="stack" style="display: block;"><div class="container"><div class="row">
+
+
+                          <div id="exampleSlider">
+                             <div class="MS-content">
+                      <% recent_products.reverse.each do |id| %>
+                      <% cart_item = Product.find_by(id: id) %>
+                      <% giaban = cart_item.variants.first.price %>
+                              <% if !cart_item.variants.first.originalprice.nil? then giagoc = cart_item.variants.first.originalprice end %>
+                      <div class="item"><div class="items">
+                                        <a href="<%= url_for(products_path)+"/"+cart_item.id.to_s+"?variant="+cart_item.variants.first.id.to_s %>" data-auto-id="glass-hockeycard-link">
+                                        <img class="gl-product-card__image" src="<%= url_for(cart_item.variants.first.avatar) %>" alt="<%= cart_item.name %>" height="240" width="240">
+                                        <div class="gl-product-card__details">
+                                        <div class="gl-product-card__details-top">
+                                        <div class="gl-product-card__category gl-label--medium" title="Performance">
+                                        <%= cart_item.gender.name %>
+                                        </div>
+                                        </div>
+                                        <div class="gl-product-card__details-main">
+                                        <div class="gl-product-card__name gl-label gl-label--medium" title=""><%= cart_item.name %></div>
+                                        <div class="gl-price-container"><span id="red"
+                              <?php if(!empty($giagoc)) echo "style=\"color: red\""?>
+                              <%= "#{number_to_currency(giaban*23000, precision: 0, separator: ",",delimiter: ".", unit: "₫", format: "%n %u")}" %>
+                              </span><strike><%= "#{number_to_currency(giaban*23000, precision: 0, separator: ",",delimiter: ".", unit: "₫", format: "%n %u")}" %></strike>
+                          </span></div>
+                                        </div>
+                                        <div class="gl-product-card__details-bottom">
+                                        <div class="gl-product-card__reviews-number">
+                                        <%= cart_item.comments.count %>
+                                        </div>
+                                        </div>
+                                        </div>
+                                        </a>
+                      </div></div>
+                      <% end %>
+                             </div>
+                             <div class="MS-controls" style="display: block;">
+                                 <button class="MS-left"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
+                                 <button class="MS-right"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                             </div>
+                         </div>
+
+                          <!-- Include jQuery -->
+                          <script src="/adidasvn/js/jquery-2.2.4.min.js"></script>
+
+                          <!-- Include Multislider -->
+                          <script src="/adidasvn/js/multislider.min.js"></script>
+
+                          <!-- Initialize element with Multislider -->
+                          <script>
+                          $("#exampleSlider").multislider({
+                              interval: 0,
+                              slideAll: true,
+                              duration: 100
+                          });
+                          </script>
+
+                      </div></div></div>
+
+                      <!-- ---------------------------------------------------------------------------------------------------------------------------- -->
+</div>
+
+<style>
+                                    @media (min-width: 1160px){
+                                    .container {
+                                        padding: 0px 113px;
+                                    }}
+
+                                    .container {
+                                        width: 100%;
+                                        max-width: 100%;
+                                        margin-left: auto;
+                                        margin-right: auto;
+                                        position: relative;
+                                    }
+
+                                    .title___37UkT {
+                                      margin-bottom: 0;
+                                      font-size: 26px;
+                                      line-height: 24px;
+                                      text-align: center;
+                                      width: 100%;
+                                    }
+
+                                    .row {
+                                      display: -webkit-flex;
+                                      display: flex;
+                                      -webkit-flex-wrap: wrap;
+                                      flex-wrap: wrap;
+                                      width: 100%;
+                                    }
+
+                                    #exampleSlider {
+                                      position: relative;
+
+                                    }
+
+                                    @media (min-width: 960px){
+                                    .exampleSlider {
+                                        padding-left: 15px;
+                                        padding-right: 15px;
+                                    }}
+
+                                    #exampleSlider {
+                                      margin: auto;
+                                      width: 100%;
+                                      max-width: 100%;
+                                      margin-left: auto;
+                                      margin-right: auto;
+                                      position: relative;
+                                    }
+
+                                    #exampleSlider .MS-content {
+                                      margin: 15px 5%;
+                                      overflow: hidden;
+                                      white-space: nowrap;
+                                    }
+
+                                    @media (max-width: 767px) {
+                                      #exampleSlider .MS-content {
+                                        margin: 0;
+                                      }
+                                    }
+
+                                    #exampleSlider .MS-content .item {
+                                      display: inline-block;
+                                      overflow: hidden;
+                                      position: relative;
+                                      vertical-align: top;
+                                      border-right: none;
+                                      width: 25%;
+                                      height: 400px;
+                                      padding: 20px 5px;
+                                      box-sizing: border-box;
+                                    }
+
+                                    #exampleSlider .MS-content .items {
+                                      display: block;
+                                      border: 1px solid transparent;
+                                      overflow: hidden;
+                                      position: relative;
+                                      vertical-align: top;
+                                    }
+
+                                    #exampleSlider .MS-content .items:hover {
+                                      border: 1px solid #d9dcdd;
+
+                                    }
+
+                                    @media (max-width: 1200px) {
+                                      #exampleSlider .MS-content .item {
+                                        width: 25%;
+                                      }
+                                    }
+
+                                    @media (max-width: 992px) {
+                                      #exampleSlider .MS-content .item {
+                                        width: 33.3333%;
+                                      }
+                                    }
+
+                                    @media (max-width: 767px) {
+                                      #exampleSlider .MS-content .item {
+                                        width: 50%;
+                                      }
+                                    }
+
+                                    #exampleSlider .MS-content .item p {
+                                      font-size: 30px;
+                                      text-align: center;
+                                      line-height: 1;
+                                      vertical-align: middle;
+                                      margin: 0;
+                                      padding: 10px 0;
+                                    }
+                                    #exampleSlider .MS-content .item img{
+                                      margin-right: auto
+                                    }
+
+                                    #exampleSlider .MS-controls button {
+                                      position: absolute;
+                                      border: none;
+                                      background: transparent;
+                                      font-size: 30px;
+                                      outline: 0;
+                                      top: 35px;
+                                    }
+
+                                    @media (max-width: 767px) {
+                                      #exampleSlider .MS-controls button {
+                                        display: none;
+                                      }
+                                    }
+
+                                    #exampleSlider .MS-controls button:hover {
+                                      cursor: pointer;
+                                    }
+
+                                    #exampleSlider .MS-controls .MS-left {
+                                      top: 130px;
+                                      left: 61px;
+                                    }
+
+                                    @media (max-width: 992px) {
+                                      #exampleSlider .MS-controls .MS-left {
+                                        left: -2px;
+                                      }
+                                    }
+
+                                    #exampleSlider .MS-controls .MS-right {
+                                      top: 130px;
+                                      right: 61px;
+                                    }
+
+                                    @media (max-width: 992px) {
+                                      #exampleSlider .MS-controls .MS-right {
+                                        right: -2px;
+                                      }
+                                    }
+
+                                    @media (min-width: 960px){
+                                    .gl-product-card__details {
+                                        padding: 10px 10px 20px;
+                                    }}
+
+                                    .gl-product-card__details {
+                                        padding: 10px;
+                                        overflow: auto;
+                                        clear: both;
+                                    }
+
+                                    .gl-product-card__details-top {
+                                      display: -webkit-flex;
+                                      display: flex;
+                                      -webkit-justify-content: space-between;
+                                      justify-content: space-between;
+                                      margin: 0 0 10px;
+                                      min-height: 17px;
+                                    }
+
+                                    .gl-product-card__name {
+                                      letter-spacing: .5px;
+                                      margin: 0 0 5px;
+                                      max-height: 30px;
+                                      overflow: hidden;
+                                    }
+
+                                    .gl-label--medium {
+                                      font-size: 12px;
+                                    }
+
+                                    .gl-product-card__category {
+                                      font-size: 12px;
+                                      color: #98989a;
+                                    }
+
+                                    .gl-label {
+                                      text-transform: uppercase;
+                                      letter-spacing: 2px;
+                                      font-weight: 400;
+                                    }
+
+                                    .gl-product-card .gl-price {
+                                      font-size: 12px;
+                                    }
+
+                                    .gl-price {
+                                      font-weight: 400;
+                                      font-size: 16px;
+                                      color: #000;
+                                    }
+
+                                    .gl-product-card__details-main {
+                                      line-height: normal;
+                                      height: 60px;
+                                    }
+
+                                    .gl-product-card__reviews-number {
+                                      font-size: 12px;
+                                      line-height: 1;
+                                      padding-left: 5px;
+                                      color: #98989a;
+                                    }
+</style>
