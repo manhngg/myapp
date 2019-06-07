@@ -40,28 +40,18 @@ Thông tin các mục trang: <%= page_entries_info @products, entry_name: 'item'
     <th></th>
     <th></th>
     <th></th>
-</tr>
+  </tr>
 
-<% @products.each do |product| %>
-<tr>
-
+  <% @products.each do |product| %>
+  <tr>
     <td><%= product.id %></td>
     <td><%= product.name %></td>
     <td>
-        <% if product.variants.first.stock.zero? %>
-            Out of stock
-    <% else %>
-    <%= image_tag product.variants.first.avatar, :height => "100",:width=>"100" %>
-        <%= form_for product, :url => cart_items_path, :html => { :method => :post } do |f|%>
-        <%= f.number_field :quantity, value: 1, class: "number-tag", min: 1 %>
-      <%= f.hidden_field :product_id, value: product.id %>
-      <%= f.submit 'Add to Cart', class: "btn btn-success" %>
-<% end %>
-<% end %>
-<%= form_for product, :url => wish_items_path, :html => { :method => :post } do |f|%>
-      <%= f.hidden_field :product_id, value: product.id %>
-      <%= f.submit @wish.wish_items.find_by(product_id: product.id) ? 'Remove from Wish' : 'Add to Wish', class: "btn btn-success" %>
-<% end %>
+      <% if product.variants.first.stock.zero? %>
+          Out of stock
+      <% else %>
+        <%= image_tag product.variants.first.avatar, :height => "100",:width=>"100" %>
+      <% end %>
     </td>
     <td>
         <% product.variants.first.images.each do |image| %>

@@ -27,7 +27,12 @@
 
     <div data-auto-id="images_container" class="images_container___3KxTB" onclick="zoom()" style="margin-left: -150px">
 
-        <%= image_tag @product.variants.find(j).images.first,onclick: "changecursor()", :id => "expandedImg",:class=>"performance-item", :alt => ""+@product.name+" "+@product.variants.find(j).color.name.to_s.titleize+" "+@product.variants.find(j).sku %>
+        <% if @product.variants.find(j).images.attached? %>
+            <%= image_tag @product.variants.find(j).images.first ,onclick: "changecursor()", :id => "expandedImg",:class=>"performance-item", :alt => ""+@product.name+" "+@product.variants.find(j).color.name.to_s.titleize+" "+@product.variants.find(j).sku %>
+        <% else %>
+            <%= image_tag @product.variants.find(j).avatar ,onclick: "changecursor()", :id => "expandedImg",:class=>"performance-item", :alt => ""+@product.name+" "+@product.variants.find(j).color.name.to_s.titleize+" "+@product.variants.find(j).sku %>
+        <% end %>
+
         <div id="myresult" class="img-zoom-result" style="display:none">
         </div>
 
@@ -246,12 +251,8 @@ SỐ LƯỢNG
 
 
     <button type="submit" >
-        <div class="gl-cta gl-cta--icon wishlist___31HQW" onclick="" style="background: white;" title="Xóa khỏi danh sách yêu thích">
-            <span class="gl-icon icon icon-heart icon--size-m"></span>
-        </div>
-
-        <div class="gl-cta gl-cta--icon wishlist___31HQW" onclick="" style="background: white;" title="Thêm vào danh sách yêu thích">
-            <span class="gl-icon icon icon-heart-empty icon--size-m"></span>
+        <div class="gl-cta gl-cta--icon wishlist___31HQW" onclick="" style="background: white;" <% if @wish.wish_items.find_by(variant_id: j) then %> title="Xóa khỏi danh sách yêu thích" <% else %>title="Thêm vào danh sách yêu thích"<% end %>>
+            <span class="gl-icon icon <%= @wish.wish_items.find_by(variant_id: j) ? 'icon-heart' : 'icon-heart-empty' %> icon--size-m"></span>
         </div>
     </button>
     <% end %>

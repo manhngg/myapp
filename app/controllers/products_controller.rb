@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
 	#only: [:new, :edit, :create, :update, :destroy]
 
 	def index
-		@products = Product.filter(params.slice(:gender,:age, :franchise, :producttype, :brand, :category, :sport)).order(:id).page(params[:page]).per(32)
+		@products = Product.filter(params.slice(:gender,:age, :franchise, :producttype, :brand, :category, :sport)).order(:id).page(params[:page]).per(5)
 		params.each do |key, value|
 			if value.present? and key != 'controller' and key != 'action' and key  != 'locale'
 				add_breadcrumb value.titleize, products_path(gender: value) if key == 'gender'

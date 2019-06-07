@@ -1,6 +1,49 @@
 <% provide(:title, "adidas Official Website") %>
 
 <div class="center jumbotron">
+  <h1>RUN FOR THE OCEANS</h1>
+  <%= link_to image_tag("lib/running-fw19-rfto-educate-hp-lf-mh-medium-d_tcm221-356981.jpg", size: "200x80"), "https://www.adidas.com/us/runfortheoceans" %>
+  <h2>It"s time to take action against marine plastic pollution. Rally your friends to join the movement.</h2>
+  <%= link_to "LEARN MORE", "https://www.adidas.com/us/runfortheoceans", class: "btn btn-lg btn-primary" %>
+</div>
+
+<div class="center jumbotron">
+  <h1>HOME OF CLASSICS</h1>
+  <%= link_to image_tag("lib/originals-fw19-hoc-drop1-tease-hp-mh-medium-collection-d_tcm221-361271.jpg", size: "200x80"), "https://www.adidas.com/us/home_of_classics" %>
+  <h2> Iconic shoes built for purpose and made to get messed up.</h2>
+  <%= link_to "LEARN MORE", "https://www.adidas.com/us/home_of_classics", class: "btn btn-lg btn-primary" %>
+</div>
+
+<div class="center jumbotron">
+  <div class="row">
+    <aside class="col-md-6">
+      <%= link_to image_tag("lib/UB19_EIM_MENS_960x480_YELLOW_tcm221-363911.jpg", size: "150x80"), "https://www.adidas.com/us/ultraboost_19" %>
+      <h1>ALPHAEDGE 4D</h1>
+      <h2>Feel the future</h2>
+      <%= link_to "PREVIEW NOW", "https://www.adidas.com/us/ultraboost_19", class: "btn btn-lg btn-primary" %>
+    </aside>
+    <div class="col-md-6">
+      <%= link_to image_tag("lib/UB19_EIM_MENS_960x480_YELLOW_tcm221-363911.jpg", size: "150x80"), "https://www.adidas.com/us/ultraboost_19" %>
+      <h1>SLEEK</h1>
+      <h2>Return harm than before.</h2>
+      <%= link_to "SHOP NOW", "#", class: "btn btn-lg btn-primary" %>
+    </div>
+  </div>
+</div>
+
+<div class="center jumbotron">
+  <h1>FOR THE OCEANS</h1>
+  <%= link_to image_tag("lib/turtle_MH_DT2-UPDATE2_tcm221-366707.jpg", size: "200x80"), "https://www.adidas.com/us/ultraboost_19" %>
+  <h2>We"re rethinking and repurposing plastic.</h2>
+  <%= link_to "LEARN MORE", "#", class: "btn btn-lg btn-primary" %>
+  <%= link_to "SHOP SUSTAINABLE PRODUCTS", "#", class: "btn btn-lg btn-primary" %>
+</div>
+
+<div class="center jumbotron">
+  <h1>WHAT'S TRENDING</h1>
+</div>
+
+<div class="center jumbotron">
                         <h1>RECENTLY VIEWED ITEMS</h1>
                         <!-- ---------------------------------------------------------------------------------------------------------------------------- -->
 

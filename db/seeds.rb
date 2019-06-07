@@ -99,35 +99,61 @@ Color.create(name: "brown")
 Color.create(name: "gold")
 Color.create(name: "silver")
 Color.create(name: "multicolor")
-# User.create(name: 'Mạnh', lastname: 'Nguyễn', email: 'n-manh@ruby-dev.jp', password: '0915827299', password_confirmation: '0915827299',admin: 'TRUE')
+# User.create(name: 'Mạnh', lastname: 'Nguyễn', email: 'manh11117@gmail.com', password: 'Abc@123456789', password_confirmation: 'Abc@123456789',admin: 'TRUE')
 Cart.create
 Wish.create
-u = '/home/m/Desktop/myapp/app/assets/images/products'
+
+u = '/home/m/adidas/app/assets/images/products'
+
 i = 1
-num = 93
+num = 1
 while i <= num  do
-p = Product.create(name: 'tubular shadow shoes', gender_id: '2', age_id: '', franchise_id: '18', producttype_id: '', brand_id: '1', category_id: '1', sport_id: '')
-p.variants.create(product_id: p.id, color_id: '1', price: '70', originalprice: '100', sku: 'AQ0886', stock: '1000')
-p.variants.first.avatar.attach(io: File.open(u+'/'+i.to_s+'/'+i.to_s+'.jpg'), filename: i.to_s+'.jpg', content_type: 'application/jpg')
-p.variants.first.hover.attach(io: File.open(u+'/'+i.to_s+'/'+i.to_s+'.jpg'), filename: i.to_s+'.jpg', content_type: 'application/jpg')
-p.variants.first.images.purge
-i+=1
+  p = Product.create(name: 'tubular shadow shoes', gender_id: '1', age_id: '', franchise_id: '18', producttype_id: '', brand_id: '1', category_id: '1', sport_id: '')
+  p.variants.create(product_id: p.id, color_id: '1', price: '70', originalprice: '100', sku: 'AQ0886', stock: '1000')
+  p.variants.first.avatar.attach(io: File.open(u+'/'+i.to_s+'/'+i.to_s+'.jpg'), filename: i.to_s+'.jpg', content_type: 'application/jpg')
+  p.variants.first.hover.attach(io: File.open(u+'/'+i.to_s+'/'+i.to_s+'.jpg'), filename: i.to_s+'.jpg', content_type: 'application/jpg')
+  p.variants.first.images.purge
+  i+=1
 end
 
+i = 2
+num = 44
+while i <= num  do
+  p = Product.create(name: 'tubular shadow shoes', gender_id: '1', age_id: '', franchise_id: '18', producttype_id: '', brand_id: '1', category_id: '1', sport_id: '')
+  p.variants.create(product_id: p.id, color_id: '1', price: '70', originalprice: '100', sku: 'AQ0886', stock: '1000')
+  p.variants.first.avatar.attach(io: File.open(u+'/'+i.to_s+'/'+i.to_s+'.jpg'), filename: i.to_s+'.jpg', content_type: 'application/jpg')
+  p.variants.first.hover.attach(io: File.open(u+'/'+i.to_s+'/'+i.to_s+'.jpg'), filename: i.to_s+'.jpg', content_type: 'application/jpg')
+  p.variants.first.images.purge
+  i+=1
+end
+
+i = 45
+num = 93
+while i <= num  do
+  p = Product.create(name: 'tubular shadow shoes', gender_id: '2', age_id: '', franchise_id: '18', producttype_id: '', brand_id: '1', category_id: '1', sport_id: '')
+  p.variants.create(product_id: p.id, color_id: '1', price: '70', originalprice: '100', sku: 'AQ0886', stock: '1000')
+  p.variants.first.avatar.attach(io: File.open(u+'/'+i.to_s+'/'+i.to_s+'.jpg'), filename: i.to_s+'.jpg', content_type: 'application/jpg')
+  p.variants.first.hover.attach(io: File.open(u+'/'+i.to_s+'/'+i.to_s+'.jpg'), filename: i.to_s+'.jpg', content_type: 'application/jpg')
+  p.variants.first.images.purge
+  i+=1
+end
+
+password = "password"
 User.create!(id: 1,
-             name:  "manh",
-             lastname:  "nguyen",
-             email: "manhnd@2nf.com.vn",
-             password:              "password",
-             password_confirmation: "password",
+             name:  "Manh",
+             lastname:  "Nguyen",
+             email: "manh11117@gmail.com",
+             password:              password,
+             password_confirmation: password,
              admin: true)
 
 User.create!(id: 2,
              name:  "Example User",
              lastname:  "Example User",
              email: "example@railstutorial.org",
-             password:              "password",
-             password_confirmation: "password")
+             password:              password,
+             password_confirmation: password,
+             admin: [true, false].sample)
 
 99.times do |n|
   name  = Faker::Name.name
@@ -140,7 +166,7 @@ User.create!(id: 2,
                email: email,
                password:              password,
                password_confirmation: password,
-               admin: [true, false].sample)
+               admin: false)
 end
 
 #mysql> UPDATE products SET gender_id = 1 WHERE 1 <= id and id <= 44;

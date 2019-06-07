@@ -1,0 +1,23 @@
+<aside id="asideMenu">
+  <ul>
+
+    <%= link_to admin_products_path do %>
+      <li class="<%= check_admin_active_controller("admin/products") %>">
+        Product management
+      </li>
+    <% end %>
+
+    <%= link_to admin_orders_path do %>
+      <li class="<%= check_admin_active_controller("admin/orders") %>">
+        Order management
+      </li>
+    <% end %>
+
+    <%= link_to admin_users_path do %>
+      <li class="<%= check_admin_active_controller("admin/users") %>">
+        User management
+      </li>
+    <% end %>
+
+  </ul>
+</aside>

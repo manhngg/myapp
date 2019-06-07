@@ -1,64 +1,51 @@
-<h1>All products</h1>
-<% if current_user.try(:admin?) %>
-<%= link_to 'Sản phẩm mới', new_product_path %>
-<% end %><br>
-Tất cả sản phẩm: <%= @products.total_count %><br>
-Sản phẩm mỗi trang: <%= @products.count %><br>
-Tổng số trang: <%= @products.total_pages %><br>
-Trang hiện tại: <%= @products.current_page %><br>
-Trang tiếp theo: <%= @products.next_page  %><br>
-Trang trước: <%= @products.prev_page %><br>
-Có phải trang đầu không?: <%= @products.first_page?  %><br>
-Có phải trang cuối không?: <%= @products.last_page? %><br>
-Có phải trang ngoài khoảng?: <%= @products.out_of_range?  %><br>
+<h1>
+    <% params.each do |key, value| %>
+        <% vi_key = 'GIỚI TÍNH' if key =='gender' %>
+        <% vi_key = 'LỨA TUỔI' if key =='age' %>
+        <% vi_key = 'DÒNG' if key =='franchise' %>
+        <% vi_key = 'NHÃN HIỆU' if key =='brand' %>
+        <% vi_key = 'MÔN' if key =='sports' %>
+        <% vi_key = 'LOẠI SẢN PHẨM' if key =='producttype' %>
+        <% vi_key = 'ĐỐI TÁC' if key =='partner' %>
+        <% vi_key = 'DANH MỤC' if key =='category' %>
+        <% vi_key = 'MI ADIDAS' if key =='miadidas' %>
+        <% vi_key = 'GIẢM GIÁ' if key =='sale' %>
+        <%=  value if value.present? and key != 'controller' and key != 'action' and key  != 'locale' and key != 'page'%>
+    <% end %>
+</h1>
 
-Thông tin các mục trang: <%= page_entries_info @products, entry_name: 'item' %><br>
-Đéo biết là cái gì: <%= rel_next_prev_link_tags @products %><br>
+<%= paginate @products %><%= page_entries_info @products, entry_name: 'item' %>
 
-Đường dẫn trang tiếp theo: <%= path_to_next_page @products %><br>
-Đường dẫn trang trước: <%= path_to_prev_page @products %><br>
-
-<%= paginate @products %>
-
-<table border="1">
+<table class="table">
   <tr>
-    <th>id sản phẩm:</th>
-    <th>Tên Sản Phẩm:</th>
-    <th>Avatar:</th>
-    <th>Images:</th>
-    <th>Gender:</th>
-    <th>Giá bán:</th>
-    <th>Giá gốc:</th>
-    <th>Màu - color:</th>
-    <th>Dòng franchise:</th>
-    <th>Loại producttype:</th>
-    <th>Nhãn brand:</th>
-    <th>Danh mục category:</th>
-    <th>Môn sport:</th>
-    <th>sku:</th>
-    <th> stock:</th>
-</tr>
+    <th scope="col">id sản phẩm:</th>
+    <th scope="col">Tên Sản Phẩm:</th>
+    <th scope="col">Avatar:</th>
+    <th scope="col">Images:</th>
+    <th scope="col">Gender:</th>
+    <th scope="col">Giá bán:</th>
+    <th scope="col">Giá gốc:</th>
+    <th scope="col">Màu - color:</th>
+    <th scope="col">Dòng franchise:</th>
+    <th scope="col">Loại producttype:</th>
+    <th scope="col">Nhãn brand:</th>
+    <th scope="col">Danh mục category:</th>
+    <th scope="col">Môn sport:</th>
+    <th scope="col">sku:</th>
+    <th scope="col"> stock:</th>
+  </tr>
 
-<% @products.each do |product| %>
-<tr>
-
+  <% @products.each do |product| %>
+  <tr>
     <td><%= product.id %></td>
     <td><%= product.name %></td>
     <td>
-        <% if product.variants.first.stock.zero? %>
-            Out of stock
-    <% else %>
-    <%= image_tag product.variants.first.avatar, :height => "100",:width=>"100" %>
-        <%= form_for product, :url => cart_items_path, :html => { :method => :post } do |f|%>
-        <%= f.number_field :quantity, value: 1, class: "number-tag", min: 1 %>
-      <%= f.hidden_field :product_id, value: product.id %>
-      <%= f.submit 'Add to Cart', class: "btn btn-success" %>
-<% end %>
-<% end %>
-<%= form_for product, :url => wish_items_path, :html => { :method => :post } do |f|%>
-      <%= f.hidden_field :product_id, value: product.id %>
-      <%= f.submit @wish.wish_items.find_by(product_id: product.id) ? 'Remove from Wish' : 'Add to Wish', class: "btn btn-success" %>
-<% end %>
+      <% if product.variants.first.stock.zero? %>
+          Out of stock
+      <% else %>
+        <%= link_to 'Xem', "/products/#{product.id}?variant=#{product.variants.first.id}" %>
+        <%= image_tag product.variants.first.avatar, :height => "100",:width=>"100" %>
+      <% end %>
     </td>
     <td>
         <% product.variants.first.images.each do |image| %>
@@ -76,15 +63,7 @@ Thông tin các mục trang: <%= page_entries_info @products, entry_name: 'item'
     <td><%= product.sport_id ? product.sport.name: '' %></td>
     <td><%= product.variants.first.sku %></td>
     <td><%= product.variants.first.stock %></td>
-    <td><%= link_to 'Xem', "/products/#{product.id}?variant=#{product.variants.first.id}" %></td>
-    <% if current_user.try(:admin?) %>
-    <td><%= link_to 'Sửa', edit_product_path(product) %></td>
-    <td><%= link_to 'Xóa', product_path(product),
-    method: :delete,
-    data: { confirm: 'Bạn có chắc không?' } %></td>
-    <% end %>
 </tr>
 <% end %>
 </table>
 <br>
-<%= link_to 'Trở lại', root_path %>
